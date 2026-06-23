@@ -51,4 +51,16 @@ class MovieRepositoryImpl @Inject constructor(
             }
         ).flow
     }
+
+    override fun getUpcomingMovies(): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                MoviePagingSource(movieApi, MovieCategory.UPCOMING)
+            }
+        ).flow
+    }
 }

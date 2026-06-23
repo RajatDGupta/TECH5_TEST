@@ -23,4 +23,10 @@ interface MovieApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int
     ): MoviesResponseDTO
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int
+    ): MoviesResponseDTO
 }

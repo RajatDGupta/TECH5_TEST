@@ -8,6 +8,7 @@ import com.tech5.test.movies.domain.model.Movie
 import com.tech5.test.movies.domain.usecase.GetPopularMoviesUseCase
 import com.tech5.test.movies.domain.usecase.GetTopRatedMoviesUseCase
 import com.tech5.test.movies.domain.usecase.GetTrendingMoviesUseCase
+import com.tech5.test.movies.domain.usecase.GetUpcomingMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(
     private val getTrendingMoviesUseCase: GetTrendingMoviesUseCase,
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase
+    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase
 ) : ViewModel() {
 
     val trendingMovies: Flow<PagingData<Movie>> = getTrendingMoviesUseCase()
@@ -26,5 +28,8 @@ class MoviesViewModel @Inject constructor(
         .cachedIn(viewModelScope)
 
     val topRatedMovies: Flow<PagingData<Movie>> = getTopRatedMoviesUseCase()
+        .cachedIn(viewModelScope)
+
+    val upcomingMovies: Flow<PagingData<Movie>> = getUpcomingMoviesUseCase()
         .cachedIn(viewModelScope)
 }

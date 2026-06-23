@@ -8,7 +8,8 @@ import com.tech5.test.movies.domain.model.Movie
 enum class MovieCategory {
     TRENDING,
     POPULAR,
-    TOP_RATED
+    TOP_RATED,
+    UPCOMING
 }
 
 class MoviePagingSource(
@@ -23,6 +24,7 @@ class MoviePagingSource(
                 MovieCategory.TRENDING -> movieApi.getTrendingMovies(page = page)
                 MovieCategory.POPULAR -> movieApi.getPopularMovies(page = page)
                 MovieCategory.TOP_RATED -> movieApi.getTopRatedMovies(page = page)
+                MovieCategory.UPCOMING -> movieApi.getUpcomingMovies(page = page)
             }
             val movies = response.results.map { it.toMovie() }
             LoadResult.Page(
