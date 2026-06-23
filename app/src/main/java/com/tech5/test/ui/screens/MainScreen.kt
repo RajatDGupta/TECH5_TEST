@@ -1,4 +1,4 @@
-package com.tech5.test.ui.main
+package com.tech5.test.ui.screens
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -21,7 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.tech5.test.ui.navigation.Screen
+import com.tech5.test.ui.navigation.Route
 import com.tech5.test.ui.navigation.bottomNavItems
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,17 +74,17 @@ fun MainScreen() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Movies,
+            startDestination = Route.Movies,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable<Screen.Movies> {
-                Text(text = "Movies Screen")
+            composable<Route.Movies> {
+                MoviesScreen()
             }
-            composable<Screen.TvShows> {
-                Text(text = "TV Shows Screen")
+            composable<Route.TvShows> {
+                TvShowsScreen()
             }
-            composable<Screen.People> {
-                Text(text = "People Screen")
+            composable<Route.People> {
+                PeopleScreen()
             }
         }
     }
