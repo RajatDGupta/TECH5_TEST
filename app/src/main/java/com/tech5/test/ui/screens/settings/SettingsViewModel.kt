@@ -1,4 +1,4 @@
-package com.tech5.test.ui.settings
+package com.tech5.test.ui.screens.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

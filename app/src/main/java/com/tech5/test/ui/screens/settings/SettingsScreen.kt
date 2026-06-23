@@ -1,4 +1,4 @@
-package com.tech5.test.ui.settings
+package com.tech5.test.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -57,7 +57,7 @@ fun SettingsScreen(
                 },
                 trailingContent = {
                     Switch(
-                        checked = isDarkTheme == true,
+                        checked = isDarkTheme,
                         onCheckedChange = { viewModel.setDarkTheme(it) }
                     )
                 }
