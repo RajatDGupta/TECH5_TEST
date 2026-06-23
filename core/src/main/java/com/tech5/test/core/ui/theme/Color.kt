@@ -1,4 +1,4 @@
-package com.tech5.test.ui.theme
+package com.tech5.test.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

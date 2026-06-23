@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TECH5_TEST"
 include(":app")
+include(":core")
