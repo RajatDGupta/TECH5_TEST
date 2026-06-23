@@ -17,4 +17,10 @@ interface MovieApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int
     ): MoviesResponseDTO
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int
+    ): MoviesResponseDTO
 }

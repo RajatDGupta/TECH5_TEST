@@ -18,6 +18,7 @@ fun MoviesScreen(
 ) {
     val trendingMovies = viewModel.trendingMovies.collectAsLazyPagingItems()
     val popularMovies = viewModel.popularMovies.collectAsLazyPagingItems()
+    val topRatedMovies = viewModel.topRatedMovies.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
@@ -33,6 +34,11 @@ fun MoviesScreen(
         MovieCarousel(
             title = "Popular Movies",
             movies = popularMovies
+        )
+
+        MovieCarousel(
+            title = "Top Rated Movies",
+            movies = topRatedMovies
         )
     }
 }

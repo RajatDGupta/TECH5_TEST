@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.tech5.test.movies.data.remote.MovieApi
+import com.tech5.test.movies.data.remote.MovieCategory
 import com.tech5.test.movies.data.remote.MoviePagingSource
 import com.tech5.test.movies.domain.model.Movie
 import com.tech5.test.movies.domain.repository.MovieRepository
@@ -22,7 +23,7 @@ class MovieRepositoryImpl @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                MoviePagingSource(movieApi)
+                MoviePagingSource(movieApi, MovieCategory.TRENDING)
             }
         ).flow
     }
@@ -34,7 +35,19 @@ class MovieRepositoryImpl @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                MoviePagingSource(movieApi, isPopular = true)
+                MoviePagingSource(movieApi, MovieCategory.POPULAR)
+            }
+        ).flow
+    }
+
+    override fun getTopRatedMovies(): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                MoviePagingSource(movieApi, MovieCategory.TOP_RATED)
             }
         ).flow
     }
