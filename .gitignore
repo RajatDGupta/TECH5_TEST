@@ -1,0 +1,39 @@
+# Gradle files
+.gradle/
+build/
+**/build/
+
+# Local configuration files
+local.properties
+
+# Signing files
+*.jks
+*.keystore
+*.pk8
+*.pem
+
+# Secrets
+secrets.properties
+google-services.json
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+/captures/
+.navigation/
+externalNativeBuild/
+.cxx/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.hprof
+.temp/
+.tmp/
