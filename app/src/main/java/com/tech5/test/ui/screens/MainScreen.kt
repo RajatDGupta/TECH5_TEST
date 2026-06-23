@@ -32,9 +32,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.tech5.test.movies.presentation.MoviesScreen
+import com.tech5.test.people.presentation.PeopleScreen
+import com.tech5.test.settings.presentation.SettingsScreen
+import com.tech5.test.tvshows.presentation.TvShowsScreen
 import com.tech5.test.ui.navigation.Route
 import com.tech5.test.ui.navigation.bottomNavItems
-import com.tech5.test.ui.screens.settings.SettingsScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

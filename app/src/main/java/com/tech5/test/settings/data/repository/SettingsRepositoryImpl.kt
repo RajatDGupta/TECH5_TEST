@@ -1,29 +1,30 @@
-package com.tech5.test.core.data.repository
+package com.tech5.test.settings.data.repository
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import com.tech5.test.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-import javax.inject.Singleton
 
 private val Context.dataStore by preferencesDataStore(name = "settings")
 
-@Singleton
-class SettingsRepository @Inject constructor(
+@ViewModelScoped
+class SettingsRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context
-) {
+) : SettingsRepository {
     private val themeKey = booleanPreferencesKey("dark_theme")
 
-    val isDarkTheme: Flow<Boolean> = context.dataStore.data
+    override val isDarkTheme: Flow<Boolean> = context.dataStore.data
         .map { preferences ->
             preferences[themeKey] ?: false
         }
 
-    suspend fun setDarkTheme(isDark: Boolean) {
+    override suspend fun setDarkTheme(isDark: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[themeKey] = isDark
         }

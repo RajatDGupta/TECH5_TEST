@@ -1,4 +1,4 @@
-package com.tech5.test.ui.screens.settings
+package com.tech5.test.settings.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
