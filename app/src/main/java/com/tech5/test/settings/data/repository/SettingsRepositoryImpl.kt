@@ -6,14 +6,14 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import com.tech5.test.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
 private val Context.dataStore by preferencesDataStore(name = "settings")
 
-@ViewModelScoped
+@Singleton
 class SettingsRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : SettingsRepository {
