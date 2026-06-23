@@ -6,7 +6,7 @@ import com.tech5.test.movies.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetMoviesUseCase @Inject constructor(
+class GetTrendingMoviesUseCase @Inject constructor(
     private val repository: MovieRepository
 ) {
     operator fun invoke(): Flow<PagingData<Movie>> {
