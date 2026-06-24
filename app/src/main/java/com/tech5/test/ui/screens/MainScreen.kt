@@ -32,14 +32,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.tech5.test.movies.presentation.MovieDetailScreen
 import com.tech5.test.movies.presentation.MoviesScreen
+import com.tech5.test.people.domain.model.Person
 import com.tech5.test.people.presentation.PeopleScreen
+import com.tech5.test.people.presentation.PersonDetailScreen
 import com.tech5.test.settings.presentation.SettingsScreen
 import com.tech5.test.tvshows.presentation.TvShowDetailScreen
 import com.tech5.test.tvshows.presentation.TvShowsScreen
 import com.tech5.test.ui.navigation.Route
 import com.tech5.test.ui.navigation.bottomNavItems
+import kotlinx.serialization.json.Json
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,7 +65,11 @@ fun MainScreen() {
     val isTvShowDetailRoute =
         currentDestination?.hierarchy?.any { it.hasRoute(Route.TvShowDetail::class) } == true
 
-    val hideBars = isSettingsRoute || isMovieDetailRoute || isTvShowDetailRoute
+    val isPersonDetailRoute =
+        currentDestination?.hierarchy?.any { it.hasRoute(Route.PersonDetail::class) } == true
+
+    val hideBars =
+        isSettingsRoute || isMovieDetailRoute || isTvShowDetailRoute || isPersonDetailRoute
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -153,7 +161,12 @@ fun MainScreen() {
                 )
             }
             composable<Route.People> {
-                PeopleScreen()
+                PeopleScreen(
+                    onPersonClick = { person ->
+                        val personJson = Json.encodeToString(person)
+                        navController.navigate(Route.PersonDetail(personJson))
+                    }
+                )
             }
             composable<Route.Settings> {
                 SettingsScreen(onBackClick = { navController.popBackStack() })
@@ -163,6 +176,11 @@ fun MainScreen() {
             }
             composable<Route.TvShowDetail> {
                 TvShowDetailScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable<Route.PersonDetail> { entry ->
+                val route = entry.toRoute<Route.PersonDetail>()
+                val person = Json.decodeFromString<Person>(route.personJson)
+                PersonDetailScreen(person, onBackClick = { navController.popBackStack() })
             }
         }
     }

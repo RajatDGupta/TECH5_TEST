@@ -9,6 +9,7 @@ fun PersonDTO.toPerson(): Person {
         name = name ?: "",
         known_for_department = known_for_department ?: "",
         popularity = popularity,
-        profilePath = profile_path?.let { "https://image.tmdb.org/t/p/w500$it" }
+        profilePath = profile_path?.let { "https://image.tmdb.org/t/p/w500$it" },
+        known_for = known_for
     )
 }

@@ -25,12 +25,14 @@ import com.tech5.test.people.domain.model.Person
 @Composable
 fun PersonItem(
     person: Person,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
+        onClick = onClick,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(

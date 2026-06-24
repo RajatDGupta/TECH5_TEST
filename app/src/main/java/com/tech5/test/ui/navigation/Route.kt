@@ -25,6 +25,9 @@ sealed interface Route {
 
     @Serializable
     data class TvShowDetail(val seriesId: Int) : Route
+
+    @Serializable
+    data class PersonDetail(val personJson: String) : Route
 }
 
 data class BottomNavItem(
@@ -38,3 +41,5 @@ val bottomNavItems = listOf(
     BottomNavItem(Route.TvShows, "TV Shows", Icons.Default.Tv),
     BottomNavItem(Route.People, "People", Icons.Default.Person)
 )
+
+

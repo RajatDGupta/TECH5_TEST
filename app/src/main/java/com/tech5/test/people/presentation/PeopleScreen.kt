@@ -18,6 +18,7 @@ import com.tech5.test.people.presentation.components.PersonItem
 
 @Composable
 fun PeopleScreen(
+    onPersonClick: (com.tech5.test.people.domain.model.Person) -> Unit,
     viewModel: PeopleViewModel = hiltViewModel()
 ) {
     val people = viewModel.peopleState.collectAsLazyPagingItems()
@@ -28,7 +29,10 @@ fun PeopleScreen(
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(people.itemCount) { index ->
                 people[index]?.let { person ->
-                    PersonItem(person = person)
+                    PersonItem(
+                        person = person,
+                        onClick = { onPersonClick(person) }
+                    )
                 }
             }
 
