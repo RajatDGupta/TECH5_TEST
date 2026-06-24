@@ -1,10 +1,17 @@
 package com.tech5.test.people.presentation
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -68,11 +75,22 @@ fun PeopleScreen(
 
         if (people.loadState.refresh is LoadState.Error) {
             val error = (people.loadState.refresh as LoadState.Error).error
-            Text(
-                text = "Error: ${error.localizedMessage}",
+            Column(
                 modifier = Modifier.align(Alignment.Center),
-                color = MaterialTheme.colorScheme.error
-            )
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Refresh",
+                    color = MaterialTheme.colorScheme.error
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                IconButton(onClick = { people.retry() }) {
+                    Icon(
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = "Retry"
+                    )
+                }
+            }
         }
     }
 }
