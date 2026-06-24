@@ -2,6 +2,7 @@ package com.tech5.test.search.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tech5.test.core.utils.toErrorMessage
 import com.tech5.test.movies.domain.model.Movie
 import com.tech5.test.movies.domain.repository.MovieRepository
 import com.tech5.test.people.domain.model.Person
@@ -69,7 +70,7 @@ class SearchViewModel @Inject constructor(
                 }
             }
         } catch (e: Exception) {
-            _searchResults.value = SearchResult.Error(e.message ?: "Unknown error")
+            _searchResults.value = SearchResult.Error(e.toErrorMessage())
         } finally {
             _isLoading.value = false
         }

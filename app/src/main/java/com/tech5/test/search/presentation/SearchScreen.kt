@@ -187,9 +187,7 @@ fun SearchScreen(
                             items(result.people) { person ->
                                 PersonItem(
                                     person = person,
-                                    onClick = { 
-                                        // Person click logic here, usually serializing to JSON as in MainScreen
-                                        // But we'll pass it back to the caller
+                                    onClick = {
                                         onPersonClick(kotlinx.serialization.json.Json.encodeToString(person))
                                     }
                                 )
