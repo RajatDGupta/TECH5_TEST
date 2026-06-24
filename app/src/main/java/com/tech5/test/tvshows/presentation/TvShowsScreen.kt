@@ -17,9 +17,7 @@ fun TvShowsScreen(
     viewModel: TvShowsViewModel = hiltViewModel()
 ) {
     val trendingTvShows = viewModel.trendingTvShows.collectAsLazyPagingItems()
-    /* val popularTvShows = viewModel.popularTvShows.collectAsLazyPagingItems()
-     val topRatedTvShows = viewModel.topRatedTvShows.collectAsLazyPagingItems()
-     val upcomingTvShows = viewModel.upcomingTvShows.collectAsLazyPagingItems()*/
+    val popularTvShows = viewModel.popularTvShows.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
@@ -32,19 +30,9 @@ fun TvShowsScreen(
             tvShows = trendingTvShows
         )
 
-//        TvShowCarousel(
-//            title = "Popular Tv Shows",
-//            tvShows = popularTvShows
-//        )
-//
-//        TvShowCarousel(
-//            title = "Top Rated Tv Shows",
-//            tvShows = topRatedTvShows
-//        )
-//
-//        TvShowCarousel(
-//            title = "Upcoming Tv Shows",
-//            tvShows = upcomingTvShows
-//        )
+        TvShowCarousel(
+            title = "Popular Tv Shows",
+            tvShows = popularTvShows
+        )
     }
 }

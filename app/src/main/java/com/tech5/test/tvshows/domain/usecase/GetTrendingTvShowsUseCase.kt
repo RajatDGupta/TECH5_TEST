@@ -6,7 +6,7 @@ import com.tech5.test.tvshows.domain.repository.TvShowRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetTvShowsUseCase @Inject constructor(
+class GetTrendingTvShowsUseCase @Inject constructor(
     private val repository: TvShowRepository
 ) {
     operator fun invoke(): Flow<PagingData<TvShow>> {

@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.tech5.test.tvshows.data.remote.TvShowApi
+import com.tech5.test.tvshows.data.remote.TvShowCategory
 import com.tech5.test.tvshows.data.remote.TvShowPagingSource
 import com.tech5.test.tvshows.domain.model.TvShow
 import com.tech5.test.tvshows.domain.repository.TvShowRepository
@@ -18,7 +19,14 @@ class TvShowRepositoryImpl @Inject constructor(
     override fun getTrendingTvShows(): Flow<PagingData<TvShow>> {
         return Pager(
             config = PagingConfig(pageSize = 20),
-            pagingSourceFactory = { TvShowPagingSource(tvShowApi) }
+            pagingSourceFactory = { TvShowPagingSource(tvShowApi, TvShowCategory.TRENDING) }
+        ).flow
+    }
+
+    override fun getPopularTvShows(): Flow<PagingData<TvShow>> {
+        return Pager(
+            config = PagingConfig(pageSize = 20),
+            pagingSourceFactory = { TvShowPagingSource(tvShowApi, TvShowCategory.POPULAR) }
         ).flow
     }
 }
