@@ -23,4 +23,10 @@ interface TvShowApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int
     ): TVShowResponseDTO
+
+    @GET("tv/airing_today")
+    suspend fun getAiringTodayTvShows(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int
+    ): TVShowResponseDTO
 }

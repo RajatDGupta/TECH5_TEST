@@ -8,6 +8,7 @@ import com.tech5.test.tvshows.domain.model.TvShow
 import com.tech5.test.tvshows.domain.usecase.GetPopularTvShowsUseCase
 import com.tech5.test.tvshows.domain.usecase.GetTopRatedTvShowsUseCase
 import com.tech5.test.tvshows.domain.usecase.GetTrendingTvShowsUseCase
+import com.tech5.test.tvshows.domain.usecase.GetAiringTodayTvShowsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class TvShowsViewModel @Inject constructor(
     private val getTrendingTvShowsUseCase: GetTrendingTvShowsUseCase,
     private val getPopularTvShowsUseCase: GetPopularTvShowsUseCase,
-    private val getTopRatedTvShowsUseCase: GetTopRatedTvShowsUseCase
+    private val getTopRatedTvShowsUseCase: GetTopRatedTvShowsUseCase,
+    private val getAiringTodayTvShowsUseCase: GetAiringTodayTvShowsUseCase
 ) : ViewModel() {
 
     val trendingTvShows: Flow<PagingData<TvShow>> = getTrendingTvShowsUseCase()
@@ -26,5 +28,8 @@ class TvShowsViewModel @Inject constructor(
         .cachedIn(viewModelScope)
 
     val topRatedTvShows: Flow<PagingData<TvShow>> = getTopRatedTvShowsUseCase()
+        .cachedIn(viewModelScope)
+
+    val airingTodayTvShows: Flow<PagingData<TvShow>> = getAiringTodayTvShowsUseCase()
         .cachedIn(viewModelScope)
 }
