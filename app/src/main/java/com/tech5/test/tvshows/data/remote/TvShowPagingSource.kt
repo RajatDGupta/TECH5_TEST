@@ -26,7 +26,7 @@ class TvShowPagingSource(
                 TvShowCategory.TOP_RATED -> tvShowApi.getTopRatedTvShows(page = page)
                 TvShowCategory.AIRING_TODAY -> tvShowApi.getAiringTodayTvShows(page = page)
             }
-            val tvShows = response.results.map { it.toTvShow() }
+            val tvShows = response.results?.map { it.toTvShow() } ?: emptyList()
             LoadResult.Page(
                 data = tvShows,
                 prevKey = if (page == 1) null else page - 1,
