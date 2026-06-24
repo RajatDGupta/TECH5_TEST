@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tech5.test.movies.domain.model.MovieDetails
 import com.tech5.test.movies.domain.usecase.GetMovieDetailsUseCase
+import com.tech5.test.core.utils.toErrorMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +18,7 @@ class MovieDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<MovieDetailsState>(MovieDetailsState())
+    private val _state = mutableStateOf(MovieDetailsState())
     val state: State<MovieDetailsState> = _state
 
     init {
@@ -33,7 +34,7 @@ class MovieDetailsViewModel @Inject constructor(
                 val movieDetails = getMovieDetailsUseCase(movieId)
                 _state.value = MovieDetailsState(movieDetails = movieDetails)
             } catch (e: Exception) {
-                _state.value = MovieDetailsState(error = e.message ?: "An unexpected error occurred")
+                _state.value = MovieDetailsState(error = e.toErrorMessage())
             }
         }
     }

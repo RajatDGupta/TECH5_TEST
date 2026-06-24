@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.tech5.test.core.utils.toErrorMessage
 import com.tech5.test.tvshows.domain.model.TvShowDetails
 import com.tech5.test.tvshows.domain.usecase.GetTvShowDetailsUseCase
 import com.tech5.test.ui.navigation.Route
@@ -35,7 +36,7 @@ class TvShowDetailViewModel @Inject constructor(
                 val details = getTvShowDetailsUseCase(tvShowId)
                 _uiState.value = TvShowDetailUiState.Success(details)
             } catch (e: Exception) {
-                _uiState.value = TvShowDetailUiState.Error(e.message ?: "Unknown error")
+                _uiState.value = TvShowDetailUiState.Error(e.toErrorMessage())
             }
         }
     }
