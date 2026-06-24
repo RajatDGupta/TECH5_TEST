@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MoviesResponseDTO(
-    val page: Int,
-    val results: List<MovieDTO>,
-    val total_pages: Int,
-    val total_results: Int
+    val page: Int ?= null,
+    val results: List<MovieDTO?> ?= null,
+    val total_pages: Int ?= null,
+    val total_results: Int ?= null
 )

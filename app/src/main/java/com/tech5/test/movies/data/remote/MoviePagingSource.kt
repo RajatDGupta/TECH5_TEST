@@ -26,7 +26,7 @@ class MoviePagingSource(
                 MovieCategory.TOP_RATED -> movieApi.getTopRatedMovies(page = page)
                 MovieCategory.UPCOMING -> movieApi.getUpcomingMovies(page = page)
             }
-            val movies = response.results.map { it.toMovie() }
+            val movies = response.results?.filterNotNull()?.map { it.toMovie() } ?: emptyList()
             LoadResult.Page(
                 data = movies,
                 prevKey = if (page == 1) null else page - 1,
