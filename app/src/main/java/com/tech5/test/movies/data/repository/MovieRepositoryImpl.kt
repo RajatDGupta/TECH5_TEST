@@ -11,7 +11,9 @@ import com.tech5.test.movies.domain.model.Movie
 import com.tech5.test.movies.domain.model.MovieDetails
 import com.tech5.test.movies.domain.repository.MovieRepository
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -66,7 +68,7 @@ class MovieRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override suspend fun getMovieDetails(movieId: Int): MovieDetails {
-        return movieApi.getMovieDetails(movieId).toMovieDetails()
+    override suspend fun getMovieDetails(movieId: Int): MovieDetails = withContext(Dispatchers.IO) {
+        movieApi.getMovieDetails(movieId).toMovieDetails()
     }
 }

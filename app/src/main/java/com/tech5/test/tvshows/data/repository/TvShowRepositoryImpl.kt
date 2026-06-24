@@ -12,7 +12,9 @@ import com.tech5.test.tvshows.domain.model.TvShow
 import com.tech5.test.tvshows.domain.model.TvShowDetails
 import com.tech5.test.tvshows.domain.repository.TvShowRepository
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -47,8 +49,8 @@ class TvShowRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override suspend fun getTvShowDetails(seriesId: Int): TvShowDetails {
-        return tvShowApi.getTvShowDetails(seriesId).toTvShowDetails()
+    override suspend fun getTvShowDetails(seriesId: Int): TvShowDetails = withContext(Dispatchers.IO) {
+        tvShowApi.getTvShowDetails(seriesId).toTvShowDetails()
     }
 }
 

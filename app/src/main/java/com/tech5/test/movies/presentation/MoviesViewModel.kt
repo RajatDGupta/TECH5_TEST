@@ -15,10 +15,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
-    private val getTrendingMoviesUseCase: GetTrendingMoviesUseCase,
-    private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
-    private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase
+    getTrendingMoviesUseCase: GetTrendingMoviesUseCase,
+    getPopularMoviesUseCase: GetPopularMoviesUseCase,
+    getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase
 ) : ViewModel() {
 
     val trendingMovies: Flow<PagingData<Movie>> = getTrendingMoviesUseCase()
