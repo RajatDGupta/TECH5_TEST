@@ -1,47 +1,50 @@
 package com.tech5.test.tvshows.presentation
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.tech5.test.tvshows.presentation.components.TvShowCarousel
 
 @Composable
 fun TvShowsScreen(
     viewModel: TvShowsViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val trendingTvShows = viewModel.trendingTvShows.collectAsLazyPagingItems()
+    /* val popularTvShows = viewModel.popularTvShows.collectAsLazyPagingItems()
+     val topRatedTvShows = viewModel.topRatedTvShows.collectAsLazyPagingItems()
+     val upcomingTvShows = viewModel.upcomingTvShows.collectAsLazyPagingItems()*/
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
-        if (uiState.isLoading) {
-            CircularProgressIndicator()
-        } else if (uiState.error != null) {
-            Text(text = uiState.error ?: "Unknown error")
-        } else {
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(uiState.tvShows) { tvShow ->
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = tvShow.name, style = MaterialTheme.typography.titleMedium)
-                        Text(text = tvShow.overview, style = MaterialTheme.typography.bodyMedium)
-                    }
-                    HorizontalDivider()
-                }
-            }
-        }
+        TvShowCarousel(
+            title = "Trending Tv Shows",
+            tvShows = trendingTvShows
+        )
+
+//        TvShowCarousel(
+//            title = "Popular Tv Shows",
+//            tvShows = popularTvShows
+//        )
+//
+//        TvShowCarousel(
+//            title = "Top Rated Tv Shows",
+//            tvShows = topRatedTvShows
+//        )
+//
+//        TvShowCarousel(
+//            title = "Upcoming Tv Shows",
+//            tvShows = upcomingTvShows
+//        )
     }
 }
