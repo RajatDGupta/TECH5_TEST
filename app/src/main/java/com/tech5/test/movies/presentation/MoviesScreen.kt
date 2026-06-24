@@ -8,12 +8,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.tech5.test.movies.presentation.components.MovieCarousel
 
 @Composable
 fun MoviesScreen(
+    onMovieClick: (Int) -> Unit,
     viewModel: MoviesViewModel = hiltViewModel()
 ) {
     val trendingMovies = viewModel.trendingMovies.collectAsLazyPagingItems()
@@ -29,22 +30,26 @@ fun MoviesScreen(
     ) {
         MovieCarousel(
             title = "Trending Movies",
-            movies = trendingMovies
+            movies = trendingMovies,
+            onMovieClick = onMovieClick
         )
 
         MovieCarousel(
             title = "Popular Movies",
-            movies = popularMovies
+            movies = popularMovies,
+            onMovieClick = onMovieClick
         )
 
         MovieCarousel(
             title = "Top Rated Movies",
-            movies = topRatedMovies
+            movies = topRatedMovies,
+            onMovieClick = onMovieClick
         )
 
         MovieCarousel(
             title = "Upcoming Movies",
-            movies = upcomingMovies
+            movies = upcomingMovies,
+            onMovieClick = onMovieClick
         )
     }
 }

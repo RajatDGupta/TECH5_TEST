@@ -19,6 +19,9 @@ sealed interface Route {
 
     @Serializable
     data object Settings : Route
+
+    @Serializable
+    data class MovieDetail(val movieId: Int) : Route
 }
 
 data class BottomNavItem(

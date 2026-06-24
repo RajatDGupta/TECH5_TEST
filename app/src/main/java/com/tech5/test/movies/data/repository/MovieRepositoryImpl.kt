@@ -3,10 +3,12 @@ package com.tech5.test.movies.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.tech5.test.movies.data.mapper.toMovieDetails
 import com.tech5.test.movies.data.remote.MovieApi
 import com.tech5.test.movies.data.remote.MovieCategory
 import com.tech5.test.movies.data.remote.MoviePagingSource
 import com.tech5.test.movies.domain.model.Movie
+import com.tech5.test.movies.domain.model.MovieDetails
 import com.tech5.test.movies.domain.repository.MovieRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
@@ -62,5 +64,9 @@ class MovieRepositoryImpl @Inject constructor(
                 MoviePagingSource(movieApi, MovieCategory.UPCOMING)
             }
         ).flow
+    }
+
+    override suspend fun getMovieDetails(movieId: Int): MovieDetails {
+        return movieApi.getMovieDetails(movieId).toMovieDetails()
     }
 }

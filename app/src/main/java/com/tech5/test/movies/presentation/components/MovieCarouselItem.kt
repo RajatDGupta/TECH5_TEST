@@ -34,6 +34,7 @@ import java.util.Locale
 @Composable
 fun MovieCarouselItem(
     movie: Movie,
+    onMovieClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -42,7 +43,8 @@ fun MovieCarouselItem(
             .fillMaxHeight()
             .padding(bottom = 12.dp),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        onClick = { onMovieClick(movie.id) }
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             AsyncImage(

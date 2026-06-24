@@ -32,6 +32,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.tech5.test.movies.presentation.MovieDetailScreen
 import com.tech5.test.movies.presentation.MoviesScreen
 import com.tech5.test.people.presentation.PeopleScreen
 import com.tech5.test.settings.presentation.SettingsScreen
@@ -52,19 +53,24 @@ fun MainScreen() {
 
     val isSettingsRoute =
         currentDestination?.hierarchy?.any { it.hasRoute(Route.Settings::class) } == true
+    
+    val isMovieDetailRoute =
+        currentDestination?.hierarchy?.any { it.hasRoute(Route.MovieDetail::class) } == true
+
+    val hideBars = isSettingsRoute || isMovieDetailRoute
 
     var showMenu by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        contentWindowInsets = if (isSettingsRoute) WindowInsets(
+        contentWindowInsets = if (hideBars) WindowInsets(
             0,
             0,
             0,
             0
         ) else WindowInsets.safeDrawing,
         topBar = {
-            if (!isSettingsRoute) {
+            if (!hideBars) {
                 TopAppBar(
                     title = {
                         Text(text = currentNavItem?.label ?: "Tech5 Test")
@@ -99,7 +105,7 @@ fun MainScreen() {
             }
         },
         bottomBar = {
-            if (!isSettingsRoute) {
+            if (!hideBars) {
                 NavigationBar {
                     bottomNavItems.forEach { item ->
                         NavigationBarItem(
@@ -126,10 +132,14 @@ fun MainScreen() {
             startDestination = Route.Movies,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(if (isSettingsRoute) PaddingValues(0.dp) else innerPadding)
+                .padding(if (hideBars) PaddingValues(0.dp) else innerPadding)
         ) {
             composable<Route.Movies> {
-                MoviesScreen()
+                MoviesScreen(
+                    onMovieClick = { movieId ->
+                        navController.navigate(Route.MovieDetail(movieId))
+                    }
+                )
             }
             composable<Route.TvShows> {
                 TvShowsScreen()
@@ -139,6 +149,9 @@ fun MainScreen() {
             }
             composable<Route.Settings> {
                 SettingsScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable<Route.MovieDetail> {
+                MovieDetailScreen(onBackClick = { navController.popBackStack() })
             }
         }
     }

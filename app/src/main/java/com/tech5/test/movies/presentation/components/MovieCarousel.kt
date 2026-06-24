@@ -30,6 +30,7 @@ import com.tech5.test.movies.domain.model.Movie
 fun MovieCarousel(
     title: String,
     movies: LazyPagingItems<Movie>,
+    onMovieClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -54,7 +55,10 @@ fun MovieCarousel(
             items(movies.itemCount) { index ->
                 val movie = movies[index]
                 if (movie != null) {
-                    MovieCarouselItem(movie = movie)
+                    MovieCarouselItem(
+                        movie = movie,
+                        onMovieClick = onMovieClick
+                    )
                 }
             }
 

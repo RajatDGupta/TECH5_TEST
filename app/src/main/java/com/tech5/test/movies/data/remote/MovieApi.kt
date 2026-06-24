@@ -1,7 +1,9 @@
 package com.tech5.test.movies.data.remote
 
 import com.tech5.test.movies.data.remote.dto.MoviesResponseDTO
+import com.tech5.test.movies.data.remote.dto.details.MovieDetailsDTO
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApi {
@@ -29,4 +31,11 @@ interface MovieApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int
     ): MoviesResponseDTO
+
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieId: Int
+    ): MovieDetailsDTO
+
+
 }
