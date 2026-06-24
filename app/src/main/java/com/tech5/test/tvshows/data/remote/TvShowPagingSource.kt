@@ -7,7 +7,8 @@ import com.tech5.test.tvshows.domain.model.TvShow
 
 enum class TvShowCategory {
     TRENDING,
-    POPULAR
+    POPULAR,
+    TOP_RATED
 }
 
 class TvShowPagingSource(
@@ -21,6 +22,7 @@ class TvShowPagingSource(
             val response = when (category) {
                 TvShowCategory.TRENDING -> tvShowApi.getTrendingTvShows(page = page)
                 TvShowCategory.POPULAR -> tvShowApi.getPopularTvShows(page = page)
+                TvShowCategory.TOP_RATED -> tvShowApi.getTopRatedTvShows(page = page)
             }
             val tvShows = response.results.map { it.toTvShow() }
             LoadResult.Page(

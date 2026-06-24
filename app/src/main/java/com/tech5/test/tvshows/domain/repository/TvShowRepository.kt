@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface TvShowRepository {
     fun getTrendingTvShows(): Flow<PagingData<TvShow>>
     fun getPopularTvShows(): Flow<PagingData<TvShow>>
+    fun getTopRatedTvShows(): Flow<PagingData<TvShow>>
 }

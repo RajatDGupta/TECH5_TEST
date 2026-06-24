@@ -18,6 +18,7 @@ fun TvShowsScreen(
 ) {
     val trendingTvShows = viewModel.trendingTvShows.collectAsLazyPagingItems()
     val popularTvShows = viewModel.popularTvShows.collectAsLazyPagingItems()
+    val topRatedTvShows = viewModel.topRatedTvShows.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
@@ -33,6 +34,11 @@ fun TvShowsScreen(
         TvShowCarousel(
             title = "Popular Tv Shows",
             tvShows = popularTvShows
+        )
+
+        TvShowCarousel(
+            title = "Top Rated Tv Shows",
+            tvShows = topRatedTvShows
         )
     }
 }

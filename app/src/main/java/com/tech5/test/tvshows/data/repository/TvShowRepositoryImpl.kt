@@ -29,4 +29,11 @@ class TvShowRepositoryImpl @Inject constructor(
             pagingSourceFactory = { TvShowPagingSource(tvShowApi, TvShowCategory.POPULAR) }
         ).flow
     }
+
+    override fun getTopRatedTvShows(): Flow<PagingData<TvShow>> {
+        return Pager(
+            config = PagingConfig(pageSize = 20),
+            pagingSourceFactory = { TvShowPagingSource(tvShowApi, TvShowCategory.TOP_RATED) }
+        ).flow
+    }
 }

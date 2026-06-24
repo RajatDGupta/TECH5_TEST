@@ -17,4 +17,10 @@ interface TvShowApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int
     ): TVShowResponseDTO
+
+    @GET("tv/top_rated")
+    suspend fun getTopRatedTvShows(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int
+    ): TVShowResponseDTO
 }
