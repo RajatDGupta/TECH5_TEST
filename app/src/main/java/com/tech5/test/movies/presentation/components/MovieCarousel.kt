@@ -10,7 +10,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -85,7 +89,26 @@ fun MovieCarousel(
                     loadState.refresh is LoadState.Error -> {
                         val e = loadState.refresh as LoadState.Error
                         item {
-                            Text(text = e.error.localizedMessage ?: "Error")
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .width(200.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "Refresh",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.error,
+                                    modifier = Modifier.padding(bottom = 8.dp)
+                                )
+                                IconButton(onClick = { retry() }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Refresh,
+                                        contentDescription = "Retry"
+                                    )
+                                }
+                            }
                         }
                     }
                 }
