@@ -10,4 +10,11 @@ interface PersonApi{
         @retrofit2.http.Query("page") page: Int
     ): PersonResponseDTO
 
+    @retrofit2.http.GET("search/person")
+    suspend fun searchPeople(
+        @retrofit2.http.Query("query") query: String,
+        @retrofit2.http.Query("language") language: String = "en-US",
+        @retrofit2.http.Query("page") page: Int = 1
+    ): PersonResponseDTO
+
 }

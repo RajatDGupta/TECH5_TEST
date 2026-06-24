@@ -3,12 +3,15 @@ package com.tech5.test.people.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.tech5.test.people.data.mapper.toPerson
 import com.tech5.test.people.data.remote.PersonApi
 import com.tech5.test.people.data.remote.PersonPagingSource
 import com.tech5.test.people.domain.model.Person
 import com.tech5.test.people.domain.repository.PersonRepository
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -20,5 +23,9 @@ class PersonRepositoryImpl @Inject constructor(
             config = PagingConfig(pageSize = 20),
             pagingSourceFactory = { PersonPagingSource(personApi) }
         ).flow
+    }
+
+    override suspend fun searchPeople(query: String): List<Person> = withContext(Dispatchers.IO) {
+        personApi.searchPeople(query).results?.map { it.toPerson() } ?: emptyList()
     }
 }

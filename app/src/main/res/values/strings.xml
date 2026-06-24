@@ -32,4 +32,9 @@
     <string name="error_check_internet">Please check your internet connection</string>
     <string name="error_server">Something went wrong on server</string>
     <string name="error_unexpected">Unexpected error occurred</string>
+    <string name="search_movies">Search Movies</string>
+    <string name="search_tv_shows">Search TV Shows</string>
+    <string name="search_people">Search People</string>
+    <string name="start_typing_to_search">Start typing to search</string>
+    <string name="no_results_found">No results found</string>
 </resources>

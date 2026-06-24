@@ -3,6 +3,7 @@ package com.tech5.test.movies.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.tech5.test.movies.data.mapper.toMovie
 import com.tech5.test.movies.data.mapper.toMovieDetails
 import com.tech5.test.movies.data.remote.MovieApi
 import com.tech5.test.movies.data.remote.MovieCategory
@@ -70,5 +71,9 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getMovieDetails(movieId: Int): MovieDetails = withContext(Dispatchers.IO) {
         movieApi.getMovieDetails(movieId).toMovieDetails()
+    }
+
+    override suspend fun searchMovies(query: String): List<Movie> = withContext(Dispatchers.IO) {
+        movieApi.searchMovies(query).results?.filterNotNull()?.map { it.toMovie() } ?: emptyList()
     }
 }

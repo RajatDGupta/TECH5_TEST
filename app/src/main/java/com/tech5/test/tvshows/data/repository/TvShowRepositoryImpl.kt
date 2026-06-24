@@ -3,6 +3,7 @@ package com.tech5.test.tvshows.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.tech5.test.tvshows.data.mapper.toTvShow
 import com.tech5.test.tvshows.data.mapper.toTvShowDetails
 import com.tech5.test.tvshows.data.remote.TvShowApi
 import com.tech5.test.tvshows.data.remote.TvShowCategory
@@ -51,6 +52,10 @@ class TvShowRepositoryImpl @Inject constructor(
 
     override suspend fun getTvShowDetails(seriesId: Int): TvShowDetails = withContext(Dispatchers.IO) {
         tvShowApi.getTvShowDetails(seriesId).toTvShowDetails()
+    }
+
+    override suspend fun searchTvShows(query: String): List<TvShow> = withContext(Dispatchers.IO) {
+        tvShowApi.searchTvShows(query).results?.map { it.toTvShow() } ?: emptyList()
     }
 }
 

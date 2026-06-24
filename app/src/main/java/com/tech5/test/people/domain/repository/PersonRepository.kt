@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PersonRepository {
     fun getPopularPeople(): Flow<PagingData<Person>>
+    suspend fun searchPeople(query: String): List<Person>
 }

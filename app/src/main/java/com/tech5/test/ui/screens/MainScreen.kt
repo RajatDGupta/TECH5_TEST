@@ -43,6 +43,7 @@ import com.tech5.test.people.presentation.PersonDetailScreen
 import com.tech5.test.settings.presentation.SettingsScreen
 import com.tech5.test.tvshows.presentation.TvShowDetailScreen
 import com.tech5.test.tvshows.presentation.TvShowsScreen
+import com.tech5.test.search.presentation.SearchScreen
 import com.tech5.test.ui.navigation.Route
 import com.tech5.test.ui.navigation.bottomNavItems
 import kotlinx.serialization.json.Json
@@ -70,8 +71,11 @@ fun MainScreen() {
     val isPersonDetailRoute =
         currentDestination?.hierarchy?.any { it.hasRoute(Route.PersonDetail::class) } == true
 
+    val isSearchRoute =
+        currentDestination?.hierarchy?.any { it.hasRoute(Route.Search::class) } == true
+
     val hideBars =
-        isSettingsRoute || isMovieDetailRoute || isTvShowDetailRoute || isPersonDetailRoute
+        isSettingsRoute || isMovieDetailRoute || isTvShowDetailRoute || isPersonDetailRoute || isSearchRoute
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -90,7 +94,15 @@ fun MainScreen() {
                         Text(text = currentNavItem?.let { stringResource(it.labelRes) } ?: stringResource(R.string.tech5_test))
                     },
                     actions = {
-                        IconButton(onClick = { /* TODO: Implement search */ }) {
+                        IconButton(onClick = {
+                            val type = when {
+                                currentDestination?.hasRoute(Route.Movies::class) == true -> "movies"
+                                currentDestination?.hasRoute(Route.TvShows::class) == true -> "tv_shows"
+                                currentDestination?.hasRoute(Route.People::class) == true -> "people"
+                                else -> "movies"
+                            }
+                            navController.navigate(Route.Search(type))
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Search,
                                 contentDescription = stringResource(R.string.search)
@@ -183,6 +195,22 @@ fun MainScreen() {
                 val route = entry.toRoute<Route.PersonDetail>()
                 val person = Json.decodeFromString<Person>(route.personJson)
                 PersonDetailScreen(person, onBackClick = { navController.popBackStack() })
+            }
+            composable<Route.Search> { entry ->
+                val route = entry.toRoute<Route.Search>()
+                SearchScreen(
+                    type = route.type,
+                    onMovieClick = { movieId ->
+                        navController.navigate(Route.MovieDetail(movieId))
+                    },
+                    onTvShowClick = { seriesId ->
+                        navController.navigate(Route.TvShowDetail(seriesId))
+                    },
+                    onPersonClick = { personJson ->
+                        navController.navigate(Route.PersonDetail(personJson))
+                    },
+                    onBackClick = { navController.popBackStack() }
+                )
             }
         }
     }

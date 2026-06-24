@@ -11,4 +11,5 @@ interface TvShowRepository {
     fun getTopRatedTvShows(): Flow<PagingData<TvShow>>
     fun getAiringTodayTvShows(): Flow<PagingData<TvShow>>
     suspend fun getTvShowDetails(seriesId: Int): TvShowDetails
+    suspend fun searchTvShows(query: String): List<TvShow>
 }

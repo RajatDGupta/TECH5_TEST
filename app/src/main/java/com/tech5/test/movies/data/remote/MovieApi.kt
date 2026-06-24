@@ -37,5 +37,12 @@ interface MovieApi {
         @Path("movie_id") movieId: Int
     ): MovieDetailsDTO
 
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1
+    ): MoviesResponseDTO
+
 
 }

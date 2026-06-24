@@ -36,4 +36,11 @@ interface TvShowApi {
     suspend fun getTvShowDetails(
         @Path("series_id") seriesId: Int
     ): TVShowDetailDTO
+
+    @GET("search/tv")
+    suspend fun searchTvShows(
+        @Query("query") query: String,
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1
+    ): TVShowResponseDTO
 }
