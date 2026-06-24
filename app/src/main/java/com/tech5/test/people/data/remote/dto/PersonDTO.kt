@@ -4,13 +4,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PersonDTO(
-    val adult: Boolean?,
-    val gender: Int?,
-    val id: Int?,
-    val known_for: List<KnownFor?>?,
-    val known_for_department: String?,
-    val name: String?,
-    val original_name: String?,
-    val popularity: Double?,
-    val profile_path: String?
+    val adult: Boolean? =null,
+    val gender: Int? = null,
+    val id: Int? = null,
+    val known_for: List<KnownFor?>? = null,
+    val known_for_department: String? = null,
+    val name: String? = null,
+    val original_name: String? = null,
+    val popularity: Double? = null,
+    val profile_path: String? = null
 )

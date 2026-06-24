@@ -13,7 +13,7 @@ class PersonPagingSource(
         val page = params.key ?: 1
         return try {
             val response = personApi.getPopularPeople(page = page)
-            val people = response.results.map { it.toPerson() }
+            val people = response.results?.map { it.toPerson() } ?: emptyList()
             LoadResult.Page(
                 data = people,
                 prevKey = if (page == 1) null else page - 1,
