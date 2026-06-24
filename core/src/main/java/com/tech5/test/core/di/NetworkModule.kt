@@ -1,6 +1,7 @@
 package com.tech5.test.core.di
 
 import android.content.Context
+import com.tech5.test.core.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,7 +61,7 @@ object NetworkModule {
                 val request = chain.request().newBuilder()
                     .addHeader(
                         "Authorization",
-                        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMmRkNDI5ZWZjYjM2ZGE4NWVkY2MzM2YyYTZhM2RjNSIsIm5iZiI6MTc4MjEyODcyNy44ODgsInN1YiI6IjZhMzkyMDU3ODJlYTQ1MDc5YjQ1NDA0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwN6QLTEwUVj-q4tpHXVZLJBSySZuM07fswUGWRM1W4"
+                        "Bearer ${BuildConfig.TMDB_ACCESS_TOKEN}"
                     )
                     .addHeader("accept", "application/json")
                     .build()

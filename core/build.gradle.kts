@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
@@ -15,6 +18,22 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        val secretsPropertiesFile = rootProject.file("secrets.properties")
+        val secretsProperties = Properties()
+        if (secretsPropertiesFile.exists()) {
+            secretsProperties.load(FileInputStream(secretsPropertiesFile))
+        }
+
+        buildConfigField(
+            "String",
+            "TMDB_ACCESS_TOKEN",
+            "\"${secretsProperties.getProperty("TMDB_ACCESS_TOKEN")}\""
+        )
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
