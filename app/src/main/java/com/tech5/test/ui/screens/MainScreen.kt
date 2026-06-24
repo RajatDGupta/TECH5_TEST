@@ -36,6 +36,7 @@ import com.tech5.test.movies.presentation.MovieDetailScreen
 import com.tech5.test.movies.presentation.MoviesScreen
 import com.tech5.test.people.presentation.PeopleScreen
 import com.tech5.test.settings.presentation.SettingsScreen
+import com.tech5.test.tvshows.presentation.TvShowDetailScreen
 import com.tech5.test.tvshows.presentation.TvShowsScreen
 import com.tech5.test.ui.navigation.Route
 import com.tech5.test.ui.navigation.bottomNavItems
@@ -57,7 +58,10 @@ fun MainScreen() {
     val isMovieDetailRoute =
         currentDestination?.hierarchy?.any { it.hasRoute(Route.MovieDetail::class) } == true
 
-    val hideBars = isSettingsRoute || isMovieDetailRoute
+    val isTvShowDetailRoute =
+        currentDestination?.hierarchy?.any { it.hasRoute(Route.TvShowDetail::class) } == true
+
+    val hideBars = isSettingsRoute || isMovieDetailRoute || isTvShowDetailRoute
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -142,7 +146,11 @@ fun MainScreen() {
                 )
             }
             composable<Route.TvShows> {
-                TvShowsScreen()
+                TvShowsScreen(
+                    onTvShowClick = { seriesId ->
+                        navController.navigate(Route.TvShowDetail(seriesId))
+                    }
+                )
             }
             composable<Route.People> {
                 PeopleScreen()
@@ -152,6 +160,9 @@ fun MainScreen() {
             }
             composable<Route.MovieDetail> {
                 MovieDetailScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable<Route.TvShowDetail> {
+                TvShowDetailScreen(onBackClick = { navController.popBackStack() })
             }
         }
     }

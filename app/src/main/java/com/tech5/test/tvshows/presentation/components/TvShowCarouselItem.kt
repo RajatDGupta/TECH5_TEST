@@ -33,6 +33,7 @@ import java.util.Locale
 @Composable
 fun TvShowCarouselItem(
     tvShow: TvShow,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -41,7 +42,8 @@ fun TvShowCarouselItem(
             .fillMaxHeight()
             .padding(bottom = 12.dp),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        onClick = onClick
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             AsyncImage(

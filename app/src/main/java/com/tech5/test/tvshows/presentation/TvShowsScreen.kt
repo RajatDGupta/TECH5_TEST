@@ -14,6 +14,7 @@ import com.tech5.test.tvshows.presentation.components.TvShowCarousel
 
 @Composable
 fun TvShowsScreen(
+    onTvShowClick: (Int) -> Unit,
     viewModel: TvShowsViewModel = hiltViewModel()
 ) {
     val trendingTvShows = viewModel.trendingTvShows.collectAsLazyPagingItems()
@@ -29,22 +30,26 @@ fun TvShowsScreen(
     ) {
         TvShowCarousel(
             title = "Trending Tv Shows",
-            tvShows = trendingTvShows
+            tvShows = trendingTvShows,
+            onTvShowClick = onTvShowClick
         )
 
         TvShowCarousel(
             title = "Popular Tv Shows",
-            tvShows = popularTvShows
+            tvShows = popularTvShows,
+            onTvShowClick = onTvShowClick
         )
 
         TvShowCarousel(
             title = "Top Rated Tv Shows",
-            tvShows = topRatedTvShows
+            tvShows = topRatedTvShows,
+            onTvShowClick = onTvShowClick
         )
 
         TvShowCarousel(
             title = "Airing Today Tv Shows",
-            tvShows = airingTodayTvShows
+            tvShows = airingTodayTvShows,
+            onTvShowClick = onTvShowClick
         )
     }
 }

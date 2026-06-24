@@ -30,6 +30,7 @@ import com.tech5.test.tvshows.domain.model.TvShow
 fun TvShowCarousel(
     title: String,
     tvShows: LazyPagingItems<TvShow>,
+    onTvShowClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -54,7 +55,10 @@ fun TvShowCarousel(
             items(tvShows.itemCount) { index ->
                 val tvShow = tvShows[index]
                 if (tvShow != null) {
-                    TvShowCarouselItem(tvShow = tvShow)
+                    TvShowCarouselItem(
+                        tvShow = tvShow,
+                        onClick = { onTvShowClick(tvShow.id) }
+                    )
                 }
             }
 

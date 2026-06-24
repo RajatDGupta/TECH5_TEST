@@ -3,10 +3,13 @@ package com.tech5.test.tvshows.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.tech5.test.tvshows.data.mapper.toTvShowDetails
 import com.tech5.test.tvshows.data.remote.TvShowApi
 import com.tech5.test.tvshows.data.remote.TvShowCategory
 import com.tech5.test.tvshows.data.remote.TvShowPagingSource
+import com.tech5.test.tvshows.data.remote.dto.details.TVShowDetailDTO
 import com.tech5.test.tvshows.domain.model.TvShow
+import com.tech5.test.tvshows.domain.model.TvShowDetails
 import com.tech5.test.tvshows.domain.repository.TvShowRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
@@ -43,4 +46,10 @@ class TvShowRepositoryImpl @Inject constructor(
             pagingSourceFactory = { TvShowPagingSource(tvShowApi, TvShowCategory.AIRING_TODAY) }
         ).flow
     }
+
+    override suspend fun getTvShowDetails(seriesId: Int): TvShowDetails {
+        return tvShowApi.getTvShowDetails(seriesId).toTvShowDetails()
+    }
 }
+
+

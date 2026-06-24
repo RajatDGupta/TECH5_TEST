@@ -1,7 +1,9 @@
 package com.tech5.test.tvshows.data.remote
 
 import com.tech5.test.tvshows.data.remote.dto.TVShowResponseDTO
+import com.tech5.test.tvshows.data.remote.dto.details.TVShowDetailDTO
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TvShowApi {
@@ -29,4 +31,9 @@ interface TvShowApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int
     ): TVShowResponseDTO
+
+    @GET("tv/{series_id}")
+    suspend fun getTvShowDetails(
+        @Path("series_id") seriesId: Int
+    ): TVShowDetailDTO
 }
