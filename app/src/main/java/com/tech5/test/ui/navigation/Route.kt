@@ -7,6 +7,8 @@ import androidx.compose.material.icons.filled.Tv
 import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.serialization.Serializable
 
+import com.tech5.test.R
+
 sealed interface Route {
     @Serializable
     data object Movies : Route
@@ -32,14 +34,14 @@ sealed interface Route {
 
 data class BottomNavItem(
     val route: Any,
-    val label: String,
+    val labelRes: Int,
     val icon: ImageVector
 )
 
 val bottomNavItems = listOf(
-    BottomNavItem(Route.Movies, "Movies", Icons.Default.Movie),
-    BottomNavItem(Route.TvShows, "TV Shows", Icons.Default.Tv),
-    BottomNavItem(Route.People, "People", Icons.Default.Person)
+    BottomNavItem(Route.Movies, R.string.movies, Icons.Default.Movie),
+    BottomNavItem(Route.TvShows, R.string.tv_shows, Icons.Default.Tv),
+    BottomNavItem(Route.People, R.string.people, Icons.Default.Person)
 )
 
 

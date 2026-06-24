@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import com.tech5.test.core.ui.theme.AppTheme
 import com.tech5.test.settings.domain.repository.SettingsRepository
 import com.tech5.test.ui.screens.MainScreen
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = stringResource(R.string.hello_format, name),
         modifier = modifier
     )
 }

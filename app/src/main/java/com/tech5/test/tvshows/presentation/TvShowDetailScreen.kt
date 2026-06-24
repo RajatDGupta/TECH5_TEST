@@ -25,6 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import com.tech5.test.tvshows.domain.model.TvShowDetails
 import java.util.*
 
@@ -48,12 +50,12 @@ fun TvShowDetailScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text("TV Show Details") },
+                title = { Text(stringResource(R.string.tv_show_details)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 },
@@ -171,7 +173,7 @@ fun TvShowDetailContent(
         Column(modifier = Modifier.padding(16.dp)) {
             // Runtime and Episode Info
             Text(
-                text = "${tvShow.number_of_episodes ?: 0} Episodes",
+                text = stringResource(R.string.episodes_format, tvShow.number_of_episodes ?: 0),
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Medium
             )
@@ -197,7 +199,7 @@ fun TvShowDetailContent(
 
             // Overview
             Text(
-                text = "Overview",
+                text = stringResource(R.string.overview),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )

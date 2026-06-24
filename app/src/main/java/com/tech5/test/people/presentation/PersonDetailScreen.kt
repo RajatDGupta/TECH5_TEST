@@ -37,6 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import coil.compose.AsyncImage
 import com.tech5.test.people.data.remote.dto.KnownFor
 import com.tech5.test.people.domain.model.Person
@@ -50,12 +52,12 @@ fun PersonDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Person Details") },
+                title = { Text(stringResource(R.string.person_details)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 }
@@ -111,7 +113,7 @@ fun PersonDetailContent(
 
         person.popularity?.let {
             Text(
-                text = String.format(LocalLocale.current.platformLocale, "Popularity: %.1f", it),
+                text = stringResource(R.string.popularity_format, it),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold
@@ -121,7 +123,7 @@ fun PersonDetailContent(
         if (!person.known_for.isNullOrEmpty()) {
             Spacer(modifier = Modifier.height(24.dp))
             Text(
-                text = "Known For",
+                text = stringResource(R.string.known_for),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.align(Alignment.Start)

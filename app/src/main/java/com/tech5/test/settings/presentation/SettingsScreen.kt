@@ -18,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,12 +34,12 @@ fun SettingsScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text("Settings") },
+                title = { Text(stringResource(R.string.settings)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 }
@@ -50,8 +52,8 @@ fun SettingsScreen(
                 .padding(innerPadding)
         ) {
             ListItem(
-                headlineContent = { Text("Dark Theme") },
-                supportingContent = { Text("Toggle between light and dark mode") },
+                headlineContent = { Text(stringResource(R.string.dark_theme)) },
+                supportingContent = { Text(stringResource(R.string.dark_theme_description)) },
                 leadingContent = {
                     Icon(Icons.Default.Palette, contentDescription = null)
                 },

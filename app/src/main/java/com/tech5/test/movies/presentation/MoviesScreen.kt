@@ -8,6 +8,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.tech5.test.movies.presentation.components.MovieCarousel
@@ -29,25 +31,25 @@ fun MoviesScreen(
             .verticalScroll(rememberScrollState())
     ) {
         MovieCarousel(
-            title = "Trending Movies",
+            title = stringResource(R.string.trending_movies),
             movies = trendingMovies,
             onMovieClick = onMovieClick
         )
 
         MovieCarousel(
-            title = "Popular Movies",
+            title = stringResource(R.string.popular_movies),
             movies = popularMovies,
             onMovieClick = onMovieClick
         )
 
         MovieCarousel(
-            title = "Top Rated Movies",
+            title = stringResource(R.string.top_rated_movies),
             movies = topRatedMovies,
             onMovieClick = onMovieClick
         )
 
         MovieCarousel(
-            title = "Upcoming Movies",
+            title = stringResource(R.string.upcoming_movies),
             movies = upcomingMovies,
             onMovieClick = onMovieClick
         )

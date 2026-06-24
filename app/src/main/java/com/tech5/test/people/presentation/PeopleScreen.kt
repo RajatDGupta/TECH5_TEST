@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import com.tech5.test.people.presentation.components.PersonItem
 
 @Composable
@@ -47,7 +49,7 @@ fun PeopleScreen(
                 is LoadState.Error -> {
                     item {
                         Text(
-                            text = "Error: ${state.error.localizedMessage}",
+                            text = stringResource(R.string.error_message, state.error.localizedMessage ?: ""),
                             modifier = Modifier.padding(16.dp),
                             color = MaterialTheme.colorScheme.error
                         )
@@ -80,14 +82,14 @@ fun PeopleScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Refresh",
+                    text = stringResource(R.string.refresh),
                     color = MaterialTheme.colorScheme.error
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 IconButton(onClick = { people.retry() }) {
                     Icon(
                         imageVector = Icons.Default.Refresh,
-                        contentDescription = "Retry"
+                        contentDescription = stringResource(R.string.retry)
                     )
                 }
             }

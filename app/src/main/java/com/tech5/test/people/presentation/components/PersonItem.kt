@@ -19,6 +19,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import coil.compose.AsyncImage
 import com.tech5.test.people.domain.model.Person
 
@@ -65,7 +67,7 @@ fun PersonItem(
                 )
                 person.popularity?.let {
                     Text(
-                        text = "Popularity: ${String.format("%.1f", it)}",
+                        text = stringResource(R.string.popularity_format, it),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary
                     )

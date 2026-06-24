@@ -8,6 +8,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.tech5.test.tvshows.presentation.components.TvShowCarousel
@@ -29,25 +31,25 @@ fun TvShowsScreen(
             .verticalScroll(rememberScrollState())
     ) {
         TvShowCarousel(
-            title = "Trending Tv Shows",
+            title = stringResource(R.string.trending_tv_shows),
             tvShows = trendingTvShows,
             onTvShowClick = onTvShowClick
         )
 
         TvShowCarousel(
-            title = "Popular Tv Shows",
+            title = stringResource(R.string.popular_tv_shows),
             tvShows = popularTvShows,
             onTvShowClick = onTvShowClick
         )
 
         TvShowCarousel(
-            title = "Top Rated Tv Shows",
+            title = stringResource(R.string.top_rated_tv_shows),
             tvShows = topRatedTvShows,
             onTvShowClick = onTvShowClick
         )
 
         TvShowCarousel(
-            title = "Airing Today Tv Shows",
+            title = stringResource(R.string.airing_today_tv_shows),
             tvShows = airingTodayTvShows,
             onTvShowClick = onTvShowClick
         )

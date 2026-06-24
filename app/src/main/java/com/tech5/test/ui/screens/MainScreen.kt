@@ -24,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -33,6 +34,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.tech5.test.R
 import com.tech5.test.movies.presentation.MovieDetailScreen
 import com.tech5.test.movies.presentation.MoviesScreen
 import com.tech5.test.people.domain.model.Person
@@ -85,19 +87,19 @@ fun MainScreen() {
             if (!hideBars) {
                 TopAppBar(
                     title = {
-                        Text(text = currentNavItem?.label ?: "Tech5 Test")
+                        Text(text = currentNavItem?.let { stringResource(it.labelRes) } ?: stringResource(R.string.tech5_test))
                     },
                     actions = {
                         IconButton(onClick = { /* TODO: Implement search */ }) {
                             Icon(
                                 imageVector = Icons.Default.Search,
-                                contentDescription = "Search"
+                                contentDescription = stringResource(R.string.search)
                             )
                         }
                         IconButton(onClick = { showMenu = true }) {
                             Icon(
                                 imageVector = Icons.Default.MoreVert,
-                                contentDescription = "More"
+                                contentDescription = stringResource(R.string.more)
                             )
                         }
                         DropdownMenu(
@@ -105,7 +107,7 @@ fun MainScreen() {
                             onDismissRequest = { showMenu = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Settings") },
+                                text = { Text(stringResource(R.string.settings)) },
                                 onClick = {
                                     showMenu = false
                                     navController.navigate(Route.Settings)
@@ -121,8 +123,8 @@ fun MainScreen() {
                 NavigationBar {
                     bottomNavItems.forEach { item ->
                         NavigationBarItem(
-                            icon = { Icon(item.icon, contentDescription = item.label) },
-                            label = { Text(item.label) },
+                            icon = { Icon(item.icon, contentDescription = stringResource(item.labelRes)) },
+                            label = { Text(stringResource(item.labelRes)) },
                             selected = currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == true,
                             onClick = {
                                 navController.navigate(item.route) {

@@ -24,6 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import com.tech5.test.tvshows.domain.model.TvShow
 
 @Composable
@@ -101,7 +103,7 @@ fun TvShowCarousel(
                                 verticalArrangement = Arrangement.Center
                             ) {
                                 Text(
-                                    text = "Refresh",
+                                    text = stringResource(R.string.refresh),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.error,
                                     modifier = Modifier.padding(bottom = 8.dp)
@@ -109,7 +111,7 @@ fun TvShowCarousel(
                                 IconButton(onClick = { retry() }) {
                                     Icon(
                                         imageVector = Icons.Default.Refresh,
-                                        contentDescription = "Retry"
+                                        contentDescription = stringResource(R.string.retry)
                                     )
                                 }
                             }

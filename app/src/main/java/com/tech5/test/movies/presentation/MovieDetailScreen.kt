@@ -46,6 +46,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.compose.ui.res.stringResource
+import com.tech5.test.R
 import coil.compose.AsyncImage
 import java.util.Locale
 
@@ -166,7 +168,7 @@ fun MovieDetailScreen(
                         }
 
                         Text(
-                            text = "${movie.runtime} min",
+                            text = stringResource(R.string.runtime_format, movie.runtime ?: 0),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
@@ -191,7 +193,7 @@ fun MovieDetailScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "Overview",
+                        text = stringResource(R.string.overview),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
@@ -232,7 +234,7 @@ fun MovieDetailScreen(
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back"
+                contentDescription = stringResource(R.string.back)
             )
         }
     }
